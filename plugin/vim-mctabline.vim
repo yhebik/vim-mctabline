@@ -1,6 +1,4 @@
 if expand('<sfile>:p')!=#expand('%:p') && exists('g:loaded_mctabline')| finish| endif| let g:loaded_mctabline = 1
-set guioptions-=e
-set showtabline=2
 function! s:tabpage_label(n)
     let title = gettabvar(a:n, 'title')
     if title !=# ''
@@ -23,4 +21,3 @@ function! MakeTabLine()
     let info = ' [' . hostname[:len(hostname)-2] . ':' . fnamemodify(getcwd(), ":~") . ']'
     return tabpages . '%=' . info
 endfunction
-set tabline=%!MakeTabLine()
