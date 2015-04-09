@@ -1,4 +1,8 @@
-if expand('<sfile>:p')!=#expand('%:p') && exists('g:loaded_mctabline')| finish| endif| let g:loaded_mctabline = 1
+if expand('<sfile>:p')!=#expand('%:p') && exists('g:loaded_mctabline') 
+    finish 
+endif
+let g:loaded_mctabline = 1
+
 function! s:tabpage_label(n)
     let title = gettabvar(a:n, 'title')
     if title !=# ''
@@ -13,7 +17,8 @@ function! s:tabpage_label(n)
     let label = '[' . no . ']'. fname
     return '%' . a:n . 'T' . hi . label . '%T%#TabLineFill#'
 endfunction
-function! MakeTabLine()
+
+function! mctabline#make_tabline()
     let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
     let sep = '|'  " separator
     let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
@@ -21,3 +26,4 @@ function! MakeTabLine()
     let info = ' [' . hostname[:len(hostname)-2] . ':' . fnamemodify(getcwd(), ":~") . ']'
     return tabpages . '%=' . info
 endfunction
+
